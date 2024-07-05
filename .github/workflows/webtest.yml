@@ -17,7 +17,7 @@ jobs:
           python-version: '3.10'
 
 
-      - name: Install Node.js 19.1
+      - name: Install Node.js 20.15
         uses: actions/setup-node@v3
         with:
           node-version: '19.1' 
@@ -35,3 +35,13 @@ jobs:
       - name: run Web tests 
         run: |
           robot -d./results -v HEADLESS:true -v BROWSER:chromium tests
+
+
+      - name: upload tests results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with: 
+          name: results-chromium
+          path: ./results
+          if-no-files-found: ignore   #não quebrar os testes por falha na esteira
+          retention-days: 2
