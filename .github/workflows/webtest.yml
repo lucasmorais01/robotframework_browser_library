@@ -6,6 +6,7 @@ on: [push]
 jobs:
   web-test:
     runs-on: ubuntu-latest
+    permissions: write-all
     steps:  
       - name: Checkout
         uses: actions/checkout@v3   
@@ -45,3 +46,22 @@ jobs:
           path: ./results
           if-no-files-found: ignore   #não quebrar os testes por falha na esteira
           retention-days: 2
+
+
+        
+      - name: download tests results
+        if: always()
+        uses: actions/download-artifact@v1
+        with:
+          name: results-chromium
+
+      - name: Send Report
+        if: always()
+        uses: joovena/robotframework-reporter-action@v2.1
+        with:
+          report_path: results-chromium
+          gh_access_token: ${{ secrets.GITHUB_TOKEN}}
+          show_passed_tests: false     
+
+
+
