@@ -1,5 +1,5 @@
 name: run Web tests
-run-name: On Push - web tests run
+run-name: On Push - web tests teste run
 on: [push]
 
 jobs:
