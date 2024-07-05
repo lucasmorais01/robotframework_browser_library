@@ -1,0 +1,9 @@
+name: run Web tests
+run-name: On Push - web tests run
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+    steps:
+      - run> echo "Primeiro Teste workflow"
