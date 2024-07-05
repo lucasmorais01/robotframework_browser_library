@@ -1,6 +1,6 @@
 name: run Web tests
 run-name: On Push - tests workflow run
-on: [push]
+On: [push]
 
 jobs:
   test:
