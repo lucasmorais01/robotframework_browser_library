@@ -10,6 +10,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Test SSH connection
+        run: ssh -T git@github.com || true
+
     
 
       - run: echo " Teste workflow ROBOT"
