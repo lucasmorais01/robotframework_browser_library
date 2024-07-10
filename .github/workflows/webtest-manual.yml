@@ -1,4 +1,4 @@
-name: run Web tests
+name: run  Manual Web tests
 run-name: Manual Run - tests workflow 
 on: 
   workflow_dispatch: 
@@ -14,7 +14,7 @@ jobs:
     permissions: write-all
     strategy:
        matrix:
-          browser: [chromium, firefox, webkit]
+          browser: [chromium, firefox]
        fail-fast: false   
     steps:  
       - name: Checkout
