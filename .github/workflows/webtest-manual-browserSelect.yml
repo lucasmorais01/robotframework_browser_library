@@ -1,6 +1,22 @@
-name: run Web tests
-run-name: On Push - tests workflow 
-on: [push]
+name: run  Manual Web tests
+run-name: Manual Run - tests workflow 
+on: 
+  workflow_dispatch: 
+    inputs:
+      tags:
+          type: string
+          description: Qual é a TAG a ser executada?
+          required: true
+      browser:
+          type: choice
+          description: Qual Browser executar?
+          required: true
+          options:
+          - "chromium"
+          - "firefox"    
+
+          
+
 
 jobs:
   web-test:
@@ -40,13 +56,13 @@ jobs:
 
       - name: Run Web tests
         run: |
-          robot -d ./results -v HEADLESS:true -v BROWSER:${{ matrix.browser}} tests
+          robot -d ./results -v HEADLESS:true -v BROWSER:${{ inputs.browser}} -i ${{ inputs.tags }} tests
 
       - name: Upload test results
         if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: results-${{ matrix.browser}}
+          name: results-${{ inputs.browser}}
           path: ./results
           if-no-files-found: ignore
           retention-days: 2
@@ -55,12 +71,12 @@ jobs:
         if: always()
         uses: actions/download-artifact@v1
         with:
-          name: results-${{ matrix.browser}}
+          name: results-${{ inputs.browser}}
 
       - name: Send Report
         if: always()
         uses: joonvena/robotframework-reporter-action@v2.1
         with:
-          report_path: results-${{ matrix.browser}}
+          report_path: results-${{ inputs.browser}}
           gh_access_token: ${{ secrets.GITHUB_TOKEN }}
           show_passed_tests: false
