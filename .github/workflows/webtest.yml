@@ -29,10 +29,12 @@ jobs:
 
       - name: Install Requirements
         run: |
-          npm install -g npm@10.8.1
-          npm install playwright/test
+          
+          
           python -m pip install --upgrade pip
           pip install -U -r requirements.txt
+          npm install -g npm@10.8.1
+          npm install playwright/test
           npx playwright install-deps
           rfbrowser init
 
