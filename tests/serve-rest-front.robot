@@ -4,6 +4,7 @@ Suite Teardown    Close Browser    ALL
 
 *** Test Cases ***
 Login com sucesso serve Rest front
+        [Tags]     validation1
         Abrir o Navegador
         Ir para o site
         Cadastrar novo usuario    
@@ -12,6 +13,7 @@ Login com sucesso serve Rest front
 
 
 Cadastrar novo produto
+        [Tags]    validation2
          Abrir o Navegador
         Ir para o site
         Cadastrar novo usuario 
